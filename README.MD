@@ -1,4 +1,4 @@
-# Tumblr favorate exporter
+# Tumblr like exporter
 
 ![](https://ws1.sinaimg.cn/large/40dfde6fly1fxulhoywxpj20un0mm0xe.jpg)
 
@@ -15,10 +15,10 @@
 ```
 git clone https://github.com/easychen/tumblr-like-exporter.git
 ```
-- Create cookie.txt , save your tumblr cookie to it ( see below  )
+- cd into it  , create cookie.txt , save your tumblr cookie to it ( see below  )
 - Run `php robo.phar export` to parse all the images
-- Run `php robo.phar download` to download them to `photos` folder under this repo ehen parsing finished 
-- You can download useing other tools , run `php robo.phar save2txt` generate a txt image list to import
+- Run `php robo.phar download` to download them to `photos` folder under this repo when parsing finished 
+- You can download using other tools , run `php robo.phar save2txt` generate a txt image list to import
 - Star the repo if you like it 😝  
 
 It can download photos in blog 
