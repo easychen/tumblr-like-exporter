@@ -2,7 +2,7 @@
 
 ![](https://ws1.sinaimg.cn/large/40dfde6fly1fxulhoywxpj20un0mm0xe.jpg)
 
-[中文说明](README.CN.MD)
+[中文说明](README_CN.MD)
 
 ## Prerequire
 - php( 5.4+ maybe , i use 7 ) cli required
