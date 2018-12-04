@@ -25,6 +25,8 @@ It can download photos in blog
 - Create next.txt , put the blog url in it  just like `https://www.tumblr.com/blog/modomoduo`
 - Run `php robo.phar export` , it will ask whether to download this page , just press `enter` ..  
 
+It won't download video by default , but you can change this by run `php robo.phar export video` instead of `php robo.phar export`
+
 
 ## How to find cookie 
 

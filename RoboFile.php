@@ -16,8 +16,10 @@ class RoboFile extends \Robo\Tasks
     
     
     // define public methods as commands
-    public function export()
+    public function export( $with_video = false )
     {
+        $this->with_video = $with_video;
+        
         if( !file_exists('cookie.txt') )
         {
             $this->say("Config cookie first , see https://github.com/easychen/tumblr-like-exporter/ for more info ");
@@ -81,6 +83,20 @@ class RoboFile extends \Robo\Tasks
 
     private function parse_images()
     {
+        if( $this->with_video )
+        {
+            $reg = '/<video.+?src="(.+?)"/is';
+            if( preg_match_all( $reg , $this->page_content , $out ) )
+            {
+                $images = array_unique( $out[1] );
+                echo "found " . count($images) . " video ... 🎬 ";  
+                $this->images = array_merge( $this->images , $images );
+                $this->image_save();
+            }
+        }
+        
+        
+        
         $reg = '/<a.+?href="(.+?)".+?class=".*?photoset_photo.*?"/is';
         if( preg_match_all( $reg , $this->page_content , $out ) )
         {
@@ -144,6 +160,12 @@ class RoboFile extends \Robo\Tasks
 
     public function download()
     {
+        while( $this->_download() === true ){};
+        echo "done";    
+    }
+
+    private function _download()
+    {
         if( !file_exists("download.json") )
         {
             copy( "images.json" , "download.json" );
@@ -154,7 +176,7 @@ class RoboFile extends \Robo\Tasks
         if( !is_array( $images ) || count( $images ) < 1 )
         {
             $this->say("no more photo to download , to restart download remove download.json and run robo download again");
-            return true;
+            return false;
         }
         
         // 每次下载10张图，然后存盘
@@ -164,7 +186,9 @@ class RoboFile extends \Robo\Tasks
         foreach( $to_download as $item )
         {
             $item = str_replace( 'https://' , 'http://' , $item );
-            file_put_contents( "./photos/" . basename( $item ) , get_image( $item ) );
+
+            $new_name = strpos( basename( $item ) , "." ) === false ?  "./photos/" . uniqid() . '.mp4' : "./photos/" . basename( $item );
+            file_put_contents( $new_name , get_image( $item ) );
             // break;
         }
 
@@ -175,20 +199,23 @@ class RoboFile extends \Robo\Tasks
         if( $count > 0 )
         {
             $this->say("10 photos downloaded ... 😀  $count to download " );
-            $this->download();
+            return true;
         }
         else
+        {
             $this->say("Image download finished 🤠 ");
-        
-        
-
-
+            return false;
+        }
+            
     }
+
 }
+
+
 
 function get_image( $url )
 {
-    $cmd = "curl '" . $url . "' -H 'Connection: keep-alive' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' -H 'Upgrade-Insecure-Requests: 1' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,ja;q=0.6,zh-TW;q=0.5'";
+    $cmd = "curl '" . $url . "' -H 'Connection: keep-alive' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' -H 'Upgrade-Insecure-Requests: 1' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,ja;q=0.6,zh-TW;q=0.5' -L";
 
     $data = shell_exec( $cmd );
     return $data;

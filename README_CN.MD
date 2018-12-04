@@ -24,6 +24,7 @@ git clone https://github.com/easychen/tumblr-like-exporter.git
  - 创建next.txt，将博客网址放在其中，如`https://www.tumblr.com/blog/modomoduo`
  - 运行`php robo.phar export`，它会询问是否要下载此页面，只需按`enter` ..
 
+它不会默认下载视频，但你可以通过运行`php robo.phar export video`而不是`php robo.phar export`来改变它。
 
 ## 如何找到cookie
 
