@@ -2,6 +2,8 @@
 
 ![](https://ws1.sinaimg.cn/large/40dfde6fly1fxulhoywxpj20un0mm0xe.jpg)
 
+[中文说明](REAAME.CN.MD)
+
 ## Prerequire
 - php( 5.4+ maybe , i use 7 ) cli required
 - Double check your terminal env  whether can visit tumblr directly , esp in China 
@@ -26,7 +28,7 @@ It can download photos in blog
 
 ## How to find cookie 
 
-- Open Chrome , sign in tumblr , normal you will on `https://www.tumblr.com/dashboard`
+- Open Chrome , sign in tumblr , normally you will on `https://www.tumblr.com/dashboard`
 - Click menu on the right top , `more tools` , `developer tools` 
 ![](https://ws1.sinaimg.cn/large/40dfde6fly1fxujmqc1b1j20kw0i8tb7.jpg)
 
