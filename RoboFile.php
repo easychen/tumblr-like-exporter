@@ -20,7 +20,7 @@ class RoboFile extends \Robo\Tasks
     {
         if( !file_exists('cookie.txt') )
         {
-            $this->say("Config cookie first , more info https://github.com/easychen/tumblr-fav-exporter ");
+            $this->say("Config cookie first , see https://github.com/easychen/tumblr-like-exporter/ for more info ");
             return false;
         }
         
