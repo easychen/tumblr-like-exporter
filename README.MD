@@ -4,7 +4,7 @@
 
 ## Prerequire
 - php( 5.4+ maybe , i use 7 ) cli required
-- Double check your terminal env can visit tumblr directly , esp in China 
+- Double check your terminal env  whether can visit tumblr directly , esp in China 
 
 ## Usage 
 
