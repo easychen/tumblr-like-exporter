@@ -10,6 +10,9 @@
 
 - Enter terminal
 - Git clone this repo
+```
+git clone https://github.com/easychen/tumblr-like-exporter.git
+```
 - Create cookie.txt , save your tumblr cookie to it ( see below  )
 - Run `php robo.phar export` to parse all the images
 - Run `php robo.phar download` to download them to `photos` folder under this repo ehen parsing finished 
