@@ -30,7 +30,7 @@ class RoboFile extends \Robo\Tasks
 
         if( file_exists( 'next.txt' ) )
         {
-           $last = file_get_contents("next.txt");
+           $last = str_replace(array("\n", "\r"), '', file_get_contents("next.txt"));
            if( "Y" == $this->askDefault( "found $last , continue ? " , "Y"  ) )
            {
                $first_page_url = $last; 
@@ -224,7 +224,7 @@ function get_image( $url )
 function get_page( $url )
 {
 
-    $cmd = "curl '" . $url . "' -H 'authority: www.tumblr.com' -H 'pragma: no-cache' -H 'cache-control: no-cache' -H 'upgrade-insecure-requests: 1' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36' -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'accept-language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,ja;q=0.6,zh-TW;q=0.5' -H 'cookie: " . file_get_contents( 'cookie.txt' ) . "'";
+    $cmd = "curl '" . $url . "' -H 'authority: www.tumblr.com' -H 'pragma: no-cache' -H 'cache-control: no-cache' -H 'upgrade-insecure-requests: 1' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36' -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' -H 'accept-language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,ja;q=0.6,zh-TW;q=0.5' -H 'cookie: " . str_replace(array("\n", "\r"), '', file_get_contents('cookie.txt')) . "'";
 
     $data = shell_exec( $cmd );
 
