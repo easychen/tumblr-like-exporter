@@ -5,7 +5,8 @@
 [中文说明](README_CN.MD)
 
 ## Prerequire
-- php( 5.4+ maybe , i use 7 ) cli required
+- php( 5.4+ maybe , i use 7 ) cli required  ( mac build-in )
+- curl command with https ( mac build-in )
 - Double check your terminal env  whether can visit tumblr directly , esp in China 
 
 ## Usage 
